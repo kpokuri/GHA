@@ -20,6 +20,7 @@ on:
         default: 'dev'
         options:
           - dev
+          - Dev
           - stage
           - prod
       restart_pingfederate:
@@ -40,9 +41,18 @@ jobs:
     # The type of runner that the job will run on
     runs-on: GHATest
 
+    environment:
+      name: ${{ github.event.inputs.environment }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+
+      - name: Display Input Parameters
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Repo Tag: ${{ github.event.inputs.repo_tag }}"
+          echo "Restart PingFederate: ${{ github.event.inputs.restart_pingfederate }}"
+      
       - uses: actions/checkout@v4
 
       - name: Set up Terraform
