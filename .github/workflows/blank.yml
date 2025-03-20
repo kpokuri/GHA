@@ -14,10 +14,24 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target Environment (e.g., Dev, Stage, Prod)'
+        type: choice
+        description: 'Select Environment'
         required: true
+        default: 'dev'
+        options:
+          - dev
+          - stage
+          - prod
       restart_pingfederate:
-        description: 'Restart PingFederate? (yes/no)'
+        type: choice
+        description: 'Restart PingFederate?'
+        required: true
+        default: 'no'
+        options:
+          - 'yes'
+          - 'no'
+      repo_tag:
+        description: 'Enter Repo Tag (e.g., v1.2.0)'
         required: true
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
