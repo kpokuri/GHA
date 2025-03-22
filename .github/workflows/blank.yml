@@ -71,3 +71,12 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      
+      - name: Check and Install Ansible (if not installed)
+        run: |
+          if ! command -v ansible &> /dev/null
+          then
+              echo "⚠️ Ansible not found. Installing via pip..."
+          else
+              echo "✅ Ansible is already installed."
+          fi
